@@ -6,7 +6,6 @@ class TaskController {
   async index ({ params }) {
     const tasks = await Task.query()
       .where('project_id', params.project_id)
-      .where('id', params.id)
       .with('user')
       .fetch()
 
@@ -29,7 +28,8 @@ class TaskController {
 
   async show ({ params }) {
     const tasks = await Task.query()
-      .where('project_id', params.id)
+      .where('project_id', params.project_id)
+      .where('id', params.id)
       .with('user')
       .fetch()
 
@@ -38,6 +38,7 @@ class TaskController {
 
   async update ({ params, request }) {
     const task = await Task.findOrFail(params.id)
+
     const data = request.only([
       'user_id',
       'title',

@@ -37,7 +37,7 @@ class User extends Model {
   }
 
   addresses () {
-    return this.hasMany('App/Models/UserAddress')
+    return this.hasOne('App/Models/UserAddress')
   }
 }
 
